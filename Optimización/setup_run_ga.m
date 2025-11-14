@@ -1,0 +1,23 @@
+%function [x_opt, fval] = setup_run_ga(f_obj, n_par, lb, ub)
+
+    % Configuración de optimización
+    %options = optimoptions('fmincon', ...
+        %'Display', 'iter', ...
+        %'MaxFunctionEvaluations', 1e4, ...
+        %'Algorithm', 'sqp');
+
+    % Punto inicial dentro de los límites
+    %x0 = (lb + ub) / 2;
+
+    % Ejecución de la optimización
+    %[x_opt, fval] = fmincon(f_obj, x0, [], [], [], [], lb, ub, [], options);
+%end
+
+function [x,fval] = setup_run_ga(f_obj,n_par,lb,ub)
+    options = optimoptions('ga', ...
+        'Display','iter', ...
+        'PlotFcn', @gaplotbestf, ...
+        'MaxGenerations', 100, ...
+        'PopulationSize', 50);
+    [x,fval] = ga(f_obj, n_par, [], [], [], [], lb, ub, [], [], options);
+end
